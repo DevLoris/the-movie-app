@@ -6,6 +6,7 @@ import com.gmail.eamosse.idbdata.api.response.toEntity
 import com.gmail.eamosse.idbdata.api.response.toToken
 import com.gmail.eamosse.idbdata.data.Category
 import com.gmail.eamosse.idbdata.data.Discover
+import com.gmail.eamosse.idbdata.data.Movie
 import com.gmail.eamosse.idbdata.data.Token
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
@@ -62,6 +63,20 @@ class MovieRepository : KoinComponent {
                     it.toDiscover()
                 }
                 Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
+
+    /**
+     * Get a movie by ID
+     * @param int id
+     * @return Result<Movie>
+     */
+    suspend fun getMovie(id:Int): Result<Movie> {
+        return when(val result = online.getMovie(id)) {
+            is Result.Succes -> {
+                Result.Succes(result.data.toMovie())
             }
             is Result.Error -> result
         }

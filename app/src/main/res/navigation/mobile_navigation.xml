@@ -39,7 +39,32 @@
         <argument
             android:name="genre"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_HomeDiscoverFragment_to_HomeFragment"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_HomeDiscoverFragment_to_HomeDetailsFragment"
+            app:destination="@id/navigation_home_details" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home_details"
+        android:name="com.gmail.eamosse.imdb.ui.home.HomeDetailsFragment"
+        android:label="@string/home_details"
+        tools:layout="@layout/fragment_discover">
+        <action
+            android:id="@+id/action_HomeDetailsFragment_to_HomeDiscoverFragment"
+            app:destination="@id/navigation_home" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+
+
+
+
+
 
     <fragment
         android:id="@+id/navigation_dashboard"

@@ -17,14 +17,14 @@ internal data class DiscoverResponse(
         @SerializedName("overview")
         val overview: String,
         @SerializedName("poster_path")
-        val poster_path: String
+        val poster_path: String ?
     )
 }
 
 
 internal fun DiscoverResponse.DiscoverItem.toDiscover() = Discover(
-    id = id!!,
-    title = title!!,
-    overview = overview!!,
-    poster_path = poster_path!!
+    id = id,
+    title = title,
+    overview = overview,
+    poster_path = poster_path ?: ""
 )

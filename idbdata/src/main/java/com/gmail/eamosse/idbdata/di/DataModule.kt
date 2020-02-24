@@ -26,7 +26,7 @@ val dataModule = module {
             dao = get()
         )
     }
-    single() {
+    single {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(get(named("BASE_URL")) as String)
@@ -122,6 +122,7 @@ class BasicInterceptor(
         val url = original.url
             .newBuilder()
             .addQueryParameter("api_key", apiKey)
+            .addQueryParameter("language","fr-CA")
             .build()
 
         // Request customization: add request headers

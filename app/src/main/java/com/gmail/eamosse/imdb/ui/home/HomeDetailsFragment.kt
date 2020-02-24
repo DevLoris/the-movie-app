@@ -14,19 +14,15 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.gmail.eamosse.imdb.databinding.FragmentDiscoverBinding
+import com.gmail.eamosse.imdb.databinding.FragmentHomeDetailsBinding
 import com.gmail.eamosse.imdb.ui.home.adapter.DiscoverAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeDiscoverFragment : Fragment() {
+class HomeDetailsFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
-    private lateinit var binding: FragmentDiscoverBinding
-    val args: HomeDiscoverFragmentArgs by navArgs()
-
-    companion object
-    {
-        const val ARG_GENRE = "genre"
-    }
+    private lateinit var binding: FragmentHomeDetailsBinding
+    val args: HomeDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,29 +30,23 @@ class HomeDiscoverFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         Log.i("IMDB", "Pre Loaded")
-        binding = FragmentDiscoverBinding.inflate(inflater, container, false)
+
+        binding = FragmentHomeDetailsBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = this@HomeDetailsFragment
+            viewModel = homeViewModel
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("IMDB", "Loaded")
         with(homeViewModel) {
             token.observe(viewLifecycleOwner, Observer {
                 //récupérer les catégories
-                Log.i("IMDB", "Get category")
-                getDiscover(genreId = args.genre)
+                Log.i("IMDB", "Get movie")
+                getMovie(args.id)
             })
-            discoveries.observe(viewLifecycleOwner, Observer {
-                binding.categoryList.adapter = DiscoverAdapter(it) {
-                    val action = HomeDiscoverFragmentDirections
-                        .actionHomeDiscoverFragmentToHomeDetailsFragment(it.id)
-                    NavHostFragment.findNavController(this@HomeDiscoverFragment)
-                        .navigate(action)
-                }
-            })
-
         }
     }
 }

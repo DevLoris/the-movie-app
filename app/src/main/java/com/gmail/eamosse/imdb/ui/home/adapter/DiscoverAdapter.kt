@@ -16,7 +16,7 @@ class DiscoverAdapter(private val items: List<Discover>, val handler: (discover:
         fun bind(item: Discover) {
             binding.item = item
 
-            binding.categoryName.setOnClickListener {
+            binding.root.setOnClickListener {
                 handler(item)
             }
         }
