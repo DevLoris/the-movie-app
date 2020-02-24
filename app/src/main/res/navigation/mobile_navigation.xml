@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
             app:destination="@id/navigation_home_second" />
+        <action
+            android:id="@+id/action_HomeFragment_to_HomeDiscoverFragment"
+            app:destination="@id/navigation_home_discover" />
     </fragment>
     <fragment
         android:id="@+id/navigation_home_second"
@@ -27,6 +30,15 @@
         <argument
             android:name="myArg"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_home_discover"
+        android:name="com.gmail.eamosse.imdb.ui.home.HomeDiscoverFragment"
+        android:label="@string/home_discover"
+        tools:layout="@layout/fragment_discover">
+        <argument
+            android:name="genre"
+            app:argType="integer" />
     </fragment>
 
     <fragment
