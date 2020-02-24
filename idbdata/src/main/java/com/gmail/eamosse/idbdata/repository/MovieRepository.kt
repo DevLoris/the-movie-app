@@ -4,10 +4,7 @@ import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.toCategory
 import com.gmail.eamosse.idbdata.api.response.toEntity
 import com.gmail.eamosse.idbdata.api.response.toToken
-import com.gmail.eamosse.idbdata.data.Category
-import com.gmail.eamosse.idbdata.data.Discover
-import com.gmail.eamosse.idbdata.data.Movie
-import com.gmail.eamosse.idbdata.data.Token
+import com.gmail.eamosse.idbdata.data.*
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
 import com.gmail.eamosse.idbdata.extensions.safeCall
@@ -77,6 +74,24 @@ class MovieRepository : KoinComponent {
         return when(val result = online.getMovie(id)) {
             is Result.Succes -> {
                 Result.Succes(result.data.toMovie())
+            }
+            is Result.Error -> result
+        }
+    }
+
+    /**
+     * Get a movie by ID
+     * @param int id
+     */
+    suspend fun getSimilarMovies(id:Int): Result<List<SimilarMovie>> {
+        return when(val result = online.getSimilarMovies(id)) {
+            is Result.Succes -> {
+                // On utilise la fonction map pour convertir les catégories de la réponse serveur
+                // en liste de categories d'objets de l'application
+                val discover = result.data.map {
+                    it.toSimilarMovie()
+                }
+                Result.Succes(discover)
             }
             is Result.Error -> result
         }

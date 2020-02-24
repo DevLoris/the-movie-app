@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.gmail.eamosse.imdb.databinding.FragmentDiscoverBinding
 import com.gmail.eamosse.imdb.databinding.FragmentHomeDetailsBinding
 import com.gmail.eamosse.imdb.ui.home.adapter.DiscoverAdapter
+import com.gmail.eamosse.imdb.ui.home.adapter.SimilarMovieAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeDetailsFragment : Fragment() {
@@ -43,9 +44,12 @@ class HomeDetailsFragment : Fragment() {
 
         with(homeViewModel) {
             token.observe(viewLifecycleOwner, Observer {
-                //récupérer les catégories
-                Log.i("IMDB", "Get movie")
                 getMovie(args.id)
+                getSimilarMovies(args.id)
+            })
+            similarMovie.observe(viewLifecycleOwner, Observer {
+                binding.categoryList.adapter = SimilarMovieAdapter(it) {
+                }
             })
         }
     }

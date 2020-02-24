@@ -1,8 +1,10 @@
 package com.gmail.eamosse.idbdata.api.service
 
+import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.CategoryResponse
 import com.gmail.eamosse.idbdata.api.response.DiscoverResponse
 import com.gmail.eamosse.idbdata.api.response.MovieResponse
+import com.gmail.eamosse.idbdata.api.response.SimilarMoviesResponse
 import com.gmail.eamosse.idbdata.api.response.TokenResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,7 +15,6 @@ internal interface MovieService {
     @GET("authentication/token/new")
     suspend fun getToken(): Response<TokenResponse>
 
-
     @GET("genre/movie/list")
     suspend fun getCategories(): Response<CategoryResponse>
 
@@ -22,4 +23,7 @@ internal interface MovieService {
 
     @GET("movie/{movie}")
     suspend fun getMovie(@Path("movie") movie:Int): Response<MovieResponse>
+
+    @GET("movie/{movie}/similar")
+    suspend fun getSimilarMovies(@Path("movie") movie:Int): Response<SimilarMoviesResponse>
 }

@@ -30,26 +30,6 @@ internal class OnlineDataSource(private val service: MovieService) {
             response.parse()
         }
     }
-   /* suspend fun getToken(): Result<TokenResponse> {
-        return try {
-            val response = service.getToken()
-            if (response.isSuccessful) {
-                Result.Succes(response.body()!!)
-            } else {
-                Result.Error(
-                    exception = Exception(),
-                    message = response.message(),
-                    code = response.code()
-                )
-            }
-        } catch (e: Exception) {
-            Result.Error(
-                exception = e,
-                message = e.message ?: "No message",
-                code = -1
-            )
-        }
-    }*/
 
     suspend fun getMovie(id:Int): Result<MovieResponse> {
         return safeCall {
@@ -69,6 +49,17 @@ internal class OnlineDataSource(private val service: MovieService) {
     }
 
 
+    suspend fun getSimilarMovies(movieId: Int): Result<List<SimilarMoviesResponse.Similar>> {
+        return safeCall {
+            val response = service.getSimilarMovies(movieId)
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data.movies)
+                is Result.Error -> result
+            }
+        }
+    }
+
+
     suspend fun getDiscover(genreId: Int): Result<List<DiscoverResponse.DiscoverItem>> {
         return safeCall {
             val response = service.getDiscover(genreId)
@@ -78,26 +69,5 @@ internal class OnlineDataSource(private val service: MovieService) {
             }
         }
     }
-
-    /*suspend fun getCategories(): Result<List<CategoryResponse.Genre>> {
-        return try {
-            val response = service.getCategories()
-            if (response.isSuccessful) {
-                Result.Succes(response.body()!!.genres)
-            } else {
-                Result.Error(
-                    exception = Exception(),
-                    message = response.message(),
-                    code = response.code()
-                )
-            }
-        } catch (e: Exception) {
-            Result.Error(
-                exception = e,
-                message = e.message ?: "No message",
-                code = -1
-            )
-        }
-    }*/
 }
 
