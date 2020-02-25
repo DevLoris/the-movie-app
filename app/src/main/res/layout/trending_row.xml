@@ -30,15 +30,31 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_list"
             android:layout_marginTop="10dp"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/best_movies_titles"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="4"
             tools:itemCount="12"
             tools:listitem="@layout/category_list_item" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/best_movies_titles"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/trending_shimmer_item" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" android:id="@+id/first"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
