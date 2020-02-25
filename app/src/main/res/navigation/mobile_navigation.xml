@@ -6,6 +6,16 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.gmail.eamosse.imdb.ui.search.SearchFragment"
+        android:label="@string/navigation_search"
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_SearchFragment_to_HomeDetailsFragment"
+            app:destination="@id/navigation_home_details" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_home"
         android:name="com.gmail.eamosse.imdb.ui.home.HomeFragment"
         android:label="@string/title_home"

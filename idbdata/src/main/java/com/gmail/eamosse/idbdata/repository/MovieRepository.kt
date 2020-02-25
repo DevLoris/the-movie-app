@@ -130,4 +130,21 @@ class MovieRepository : KoinComponent {
             is Result.Error -> result
         }
     }
+
+    /**
+     * Get trending movies
+     */
+    suspend fun getSearch(query:String): Result<List<Discover>> {
+        return when(val result = online.getSearch(query)) {
+            is Result.Succes -> {
+                // On utilise la fonction map pour convertir les catégories de la réponse serveur
+                // en liste de categories d'objets de l'application
+                val discover = result.data.map {
+                    it.toDiscover()
+                }
+                Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
 }

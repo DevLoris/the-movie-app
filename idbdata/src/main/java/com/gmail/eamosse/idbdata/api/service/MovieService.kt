@@ -32,4 +32,7 @@ internal interface MovieService {
 
     @GET("trending/person/week")
     suspend fun getTrendinsPersons(): Response<TrendingPersonResponse>
+
+    @GET("search/movie")
+    suspend fun getSearch(@Query("query") query:String): Response<SearchResponse>
 }

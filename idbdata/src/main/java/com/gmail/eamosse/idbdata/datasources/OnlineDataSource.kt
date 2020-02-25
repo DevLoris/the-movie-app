@@ -89,5 +89,15 @@ internal class OnlineDataSource(private val service: MovieService) {
             }
         }
     }
+
+    suspend fun getSearch(query:String): Result<List<SearchResponse.Result>> {
+        return safeCall {
+            val response = service.getSearch(query)
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data.results)
+                is Result.Error -> result
+            }
+        }
+    }
 }
 

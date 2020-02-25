@@ -2,6 +2,7 @@ package com.gmail.eamosse.imdb.di
 
 import android.content.Context
 import com.gmail.eamosse.imdb.ui.home.HomeViewModel
+import com.gmail.eamosse.imdb.ui.search.SearchViewModel
 import com.gmail.eamosse.imdb.ui.trending.TrendingViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -27,5 +28,9 @@ val appModule = module {
 
     viewModel {
         TrendingViewModel(repository = get())
+    }
+
+    viewModel {
+        SearchViewModel(repository = get())
     }
 }
