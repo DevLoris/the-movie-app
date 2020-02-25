@@ -13,4 +13,7 @@
     <string name="home_discover" />
     <string name="home_details">Details</string>
     <string name="title_trending">Tendances</string>
+    <string name="best_movies">Films en tendance</string>
+    <string name="best_peoples">Personnalités en tendance</string>
+    <string name="categories">Catégories</string>
 </resources>

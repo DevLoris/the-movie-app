@@ -4,8 +4,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,12 +14,14 @@
             layout="@layout/trending_row"
             android:id="@+id/trending_movies"
             android:layout_width="match_parent"
+            app:titleSection="@{@string/best_movies}"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
         <include
             layout="@layout/trending_row"
+            app:titleSection="@{@string/best_peoples}"
             android:id="@+id/trending_actors"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
         <include
             layout="@layout/trending_row"
+            app:titleSection="@{@string/categories}"
             android:id="@+id/trending_categories"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
