@@ -26,4 +26,10 @@ internal interface MovieService {
 
     @GET("movie/{movie}/similar")
     suspend fun getSimilarMovies(@Path("movie") movie:Int): Response<SimilarMoviesResponse>
+
+    @GET("trending/movie/week")
+    suspend fun getTrendingsMovies(): Response<TrendingMovieResponse>
+
+    @GET("trending/person/week")
+    suspend fun getTrendinsPersons(): Response<TrendingPersonResponse>
 }

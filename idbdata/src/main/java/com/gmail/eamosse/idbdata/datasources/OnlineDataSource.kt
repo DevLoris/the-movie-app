@@ -69,5 +69,25 @@ internal class OnlineDataSource(private val service: MovieService) {
             }
         }
     }
+
+    suspend fun getTrendingMovies(): Result<List<TrendingMovieResponse.Result>> {
+        return safeCall {
+            val response = service.getTrendingsMovies()
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data.results)
+                is Result.Error -> result
+            }
+        }
+    }
+
+    suspend fun getTrendingPeoples(): Result<List<TrendingPersonResponse.Person>> {
+        return safeCall {
+            val response = service.getTrendinsPersons()
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data.results)
+                is Result.Error -> result
+            }
+        }
+    }
 }
 

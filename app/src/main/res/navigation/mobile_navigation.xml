@@ -68,9 +68,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.gmail.eamosse.imdb.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.gmail.eamosse.imdb.ui.trending.TrendingFragment"
+        android:label="@string/title_trending"
+        tools:layout="@layout/trending_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"

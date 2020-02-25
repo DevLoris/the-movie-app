@@ -96,4 +96,38 @@ class MovieRepository : KoinComponent {
             is Result.Error -> result
         }
     }
+
+    /**
+     * Get trending movies
+     */
+    suspend fun getTrendingMovies(): Result<List<Trending>> {
+        return when(val result = online.getTrendingMovies()) {
+            is Result.Succes -> {
+                // On utilise la fonction map pour convertir les catégories de la réponse serveur
+                // en liste de categories d'objets de l'application
+                val discover = result.data.map {
+                    it.toTrending()
+                }
+                Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
+
+    /**
+     * Get trending movies
+     */
+    suspend fun getTrendingPeoples(): Result<List<Person>> {
+        return when(val result = online.getTrendingPeoples()) {
+            is Result.Succes -> {
+                // On utilise la fonction map pour convertir les catégories de la réponse serveur
+                // en liste de categories d'objets de l'application
+                val discover = result.data.map {
+                    it.toPerson()
+                }
+                Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
 }

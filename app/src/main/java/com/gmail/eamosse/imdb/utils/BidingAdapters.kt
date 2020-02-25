@@ -13,7 +13,9 @@ object BidingAdapters {
     @JvmStatic
     fun changeImage(view: AppCompatImageView, url: String?) {
         if(url == null) return
-        Glide.with(view).load("https://image.tmdb.org/t/p/w500/$url").into(view)
+        Glide.with(view).load("https://image.tmdb.org/t/p/w500/$url")
+            .centerCrop()
+            .into(view)
     }
     @SuppressLint("SetTextI18n")
     @BindingAdapter("app:voteText")
