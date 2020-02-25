@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import com.gmail.eamosse.imdb.databinding.TrendingFragmentBinding
+import com.gmail.eamosse.imdb.ui.home.HomeDiscoverFragmentDirections
 import com.gmail.eamosse.imdb.ui.home.HomeFragmentDirections
 import com.gmail.eamosse.imdb.ui.trending.adapter.TrendingCategoryAdapter
 import com.gmail.eamosse.imdb.ui.trending.adapter.TrendingMovieAdapter
@@ -38,12 +39,20 @@ class TrendingFragment : Fragment() {
             })
 
             categories.observe(viewLifecycleOwner, Observer {
-                binding.trendingCategories.categoryList.adapter = TrendingCategoryAdapter(it) {
+                binding.trendingCategories.categoryList.adapter = TrendingCategoryAdapter(it)  {
+                    val action = TrendingFragmentDirections
+                        .actionTrendingFragmentToHomeDiscoverFragment(it.id)
+                    NavHostFragment.findNavController(this@TrendingFragment)
+                        .navigate(action)
                 }
             })
 
             trendingMovies.observe(viewLifecycleOwner, Observer {
                 binding.trendingMovies.categoryList.adapter = TrendingMovieAdapter(it) {
+                    val action = TrendingFragmentDirections
+                        .actionTrendingFragmentToHomeDetailsFragment(it.id)
+                    NavHostFragment.findNavController(this@TrendingFragment)
+                        .navigate(action)
                 }
             })
 

@@ -16,7 +16,7 @@
             android:id="@+id/category_img"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:bindImage="@{item.profile_path}"
+            app:bindImageRounded="@{item.profile_path}"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

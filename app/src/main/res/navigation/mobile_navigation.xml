@@ -51,7 +51,7 @@
         android:id="@+id/navigation_home_details"
         android:name="com.gmail.eamosse.imdb.ui.home.HomeDetailsFragment"
         android:label="@string/home_details"
-        tools:layout="@layout/fragment_discover">
+        tools:layout="@layout/fragment_home_details">
         <action
             android:id="@+id/action_HomeDetailsFragment_to_HomeDiscoverFragment"
             app:destination="@id/navigation_home" />
@@ -70,7 +70,15 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.gmail.eamosse.imdb.ui.trending.TrendingFragment"
         android:label="@string/title_trending"
-        tools:layout="@layout/trending_fragment" />
+        tools:layout="@layout/trending_fragment">
+        <action
+            android:id="@+id/action_TrendingFragment_to_HomeDetailsFragment"
+            app:destination="@id/navigation_home_details" />
+        <action
+            android:id="@+id/action_TrendingFragment_to_HomeDiscoverFragment"
+            app:destination="@id/navigation_home_discover" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_notifications"
