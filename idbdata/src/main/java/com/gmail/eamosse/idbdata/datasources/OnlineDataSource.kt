@@ -1,5 +1,6 @@
 package com.gmail.eamosse.idbdata.datasources
 
+import com.gmail.eamosse.idbdata.api.body.RateBody
 import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.CategoryResponse
 import com.gmail.eamosse.idbdata.api.response.DiscoverResponse
@@ -98,6 +99,10 @@ internal class OnlineDataSource(private val service: MovieService) {
                 is Result.Error -> result
             }
         }
+    }
+
+    suspend fun postRating(movie:Int, rating:Float, session:String) {
+        service.postRating(movie, RateBody(rating), session);
     }
 }
 

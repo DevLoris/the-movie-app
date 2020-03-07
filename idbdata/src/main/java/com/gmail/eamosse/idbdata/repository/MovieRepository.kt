@@ -147,4 +147,9 @@ class MovieRepository : KoinComponent {
             is Result.Error -> result
         }
     }
+
+
+    suspend fun postRating(movie:Int, rating:Float, session:String) {
+        online.postRating(movie, rating, session);
+    }
 }

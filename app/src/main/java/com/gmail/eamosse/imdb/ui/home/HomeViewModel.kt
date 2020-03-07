@@ -101,4 +101,12 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
             }
         }
     }
+
+    fun rateCurrentMovie(rate:Float = 10f) {
+        if (movie.value is Movie) {
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.postRating(movie.value!!.id, rate, token.value!!.requestToken);
+            }
+        }
+    }
 }
