@@ -98,6 +98,25 @@ class MovieRepository : KoinComponent {
     }
 
     /**
+     * Get vdieos of a movie by ID
+     * @param int id
+     */
+    suspend fun getVideosOfMovie(id:Int): Result<List<VideoMovie>> {
+        return when(val result = online.getVideos(id)) {
+            is Result.Succes -> {
+                // On utilise la fonction map pour convertir les catégories de la réponse serveur
+                // en liste de categories d'objets de l'application
+                val discover = result.data.map {
+                    it.toVideo()
+                }
+                Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
+
+
+    /**
      * Get trending movies
      */
     suspend fun getTrendingMovies(): Result<List<Trending>> {

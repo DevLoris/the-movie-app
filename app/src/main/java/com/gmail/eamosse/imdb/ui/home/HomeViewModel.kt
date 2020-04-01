@@ -37,6 +37,10 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
     val similarMovie: LiveData<List<SimilarMovie>>
         get() = _similarMovie
 
+    private val _video: MutableLiveData<VideoMovie> = MutableLiveData()
+    val video: LiveData<VideoMovie>
+        get() = _video
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = repository.getToken()) {
@@ -94,6 +98,20 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
             when (val result = repository.getSimilarMovies(movieId)) {
                 is Result.Succes -> {
                     _similarMovie.postValue(result.data)
+                }
+                is Result.Error -> {
+                    _error.postValue(result.message)
+                }
+            }
+        }
+    }
+
+    fun getTrailer(movieId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = repository.getVideosOfMovie(movieId)) {
+                is Result.Succes -> {
+                    var filtered = result.data.find { it.type == ("Trailer");  }
+                    _video.postValue(filtered);
                 }
                 is Result.Error -> {
                     _error.postValue(result.message)
