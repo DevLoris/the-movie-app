@@ -8,6 +8,7 @@ import com.gmail.eamosse.idbdata.data.*
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
 import com.gmail.eamosse.idbdata.extensions.safeCall
+import com.gmail.eamosse.idbdata.local.entities.FavoriteMovie
 import com.gmail.eamosse.idbdata.utils.Result
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -51,8 +52,8 @@ class MovieRepository : KoinComponent {
         }
     }
 
-    suspend fun getDiscover(id:Int): Result<List<Discover>> {
-        return when(val result = online.getDiscover(id)) {
+    suspend fun getDiscover(id:Int, page:Int = 0): Result<List<Discover>> {
+        return when(val result = online.getDiscover(id, page)) {
             is Result.Succes -> {
                 // On utilise la fonction map pour convertir les catégories de la réponse serveur
                 // en liste de categories d'objets de l'application
@@ -170,5 +171,9 @@ class MovieRepository : KoinComponent {
 
     suspend fun postRating(movie:Int, rating:Float, session:String) {
         online.postRating(movie, rating, session);
+    }
+
+    suspend fun getFavoritesMovies() : List<FavoriteMovie> {
+        return local.getFavoritesMovies();
     }
 }

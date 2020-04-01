@@ -6,6 +6,7 @@ import com.gmail.eamosse.idbdata.BuildConfig
 import com.gmail.eamosse.idbdata.api.service.MovieService
 import com.gmail.eamosse.idbdata.datasources.LocalDataSource
 import com.gmail.eamosse.idbdata.datasources.OnlineDataSource
+import com.gmail.eamosse.idbdata.local.daos.FavoriteDao
 import com.gmail.eamosse.idbdata.local.daos.TokenDao
 import com.gmail.eamosse.idbdata.local.databases.IdbDataBase
 import com.gmail.eamosse.idbdata.repository.MovieRepository
@@ -61,10 +62,14 @@ private object DatabaseConfig {
         return Room.databaseBuilder(
             context,
             IdbDataBase::class.java, "idb_database.db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     fun getTokenDao(db: IdbDataBase): TokenDao = db.tokenDao()
+
+    fun getFavoriteDao(db: IdbDataBase): FavoriteDao = db.favoriteDao()
 }
 
 private object NetworkXConfig {

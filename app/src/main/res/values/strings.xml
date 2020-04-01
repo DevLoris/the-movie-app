@@ -17,4 +17,6 @@
     <string name="best_peoples">Personnalités en tendance</string>
     <string name="categories">Catégories</string>
     <string name="navigation_search">Recherche</string>
+    <string name="favoris">Favoris</string>
+    <string name="_5_toiles">5 étoiles</string>
 </resources>

@@ -108,13 +108,23 @@
             app:layout_constraintBottom_toTopOf="@id/category_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
+
             <Button
                 android:layout_width="wrap_content"
                 android:onClick="@{() -> viewModel.rateCurrentMovie(2f)}"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="5 étoiles"
-                app:layout_constraintTop_toTopOf="parent"></Button>
+                android:id="@+id/favorite"
+                android:text="@string/favoris"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:onClick="@{() -> viewModel.favorite()}"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/favorite"
+                android:text="@string/_5_toiles"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
