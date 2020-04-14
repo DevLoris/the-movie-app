@@ -1,6 +1,7 @@
 package com.gmail.eamosse.imdb.di
 
 import android.content.Context
+import com.gmail.eamosse.imdb.ui.actor.ActorViewModel
 import com.gmail.eamosse.imdb.ui.home.HomeViewModel
 import com.gmail.eamosse.imdb.ui.favorite.FavoriteViewModel
 import com.gmail.eamosse.imdb.ui.search.SearchViewModel
@@ -35,7 +36,11 @@ val appModule = module {
         SearchViewModel(repository = get())
     }
 
-    viewModel {
-        FavoriteViewModel(repository = get())
+    viewModel { 
+        FavoriteViewModel(repository = get()) 
+    }
+  
+    viewModel {  
+        ActorViewModel(repository = get()) 
     }
 }

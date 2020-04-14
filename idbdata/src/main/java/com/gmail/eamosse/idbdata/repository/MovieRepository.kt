@@ -1,5 +1,6 @@
 package com.gmail.eamosse.idbdata.repository
 
+import android.util.Log
 import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.toCategory
 import com.gmail.eamosse.idbdata.api.response.toEntity
@@ -168,9 +169,49 @@ class MovieRepository : KoinComponent {
         }
     }
 
+    /**
+     * Get trending movies
+     */
+    suspend fun getMovieActors(movieId: Int): Result<List<Actor>> {
+        return when(val result = online.getMovieActor(movieId)) {
+            is Result.Succes -> {
+                val discover = result.data.map {
+                    it.toActor()
+                }
+                Result.Succes(discover)
+            }
+            is Result.Error -> result
+        }
+    }
+
+    /**
+     * Get actor
+     */
+    suspend fun getActor(id: Int): Result<Actor> {
+        return when(val result = online.getActor(id)) {
+            is Result.Succes -> Result.Succes(result.data.toActor())
+            is Result.Error -> result
+        }
+    }
+
+
+    /**
+     * Get actor movies
+     */
+    suspend fun getActorMovies(id: Int): Result<List<ActorMovies>> {
+        return when(val result = online.getActorMovies(id)) {
+            is Result.Succes -> {
+                val movies = result.data.map {
+                    it.toMovie()
+                }
+                Result.Succes(movies)
+            }
+            is Result.Error -> result
+        }
+    }
 
     suspend fun postRating(movie:Int, rating:Float, session:String) {
-        online.postRating(movie, rating, session);
+        online.postRating(movie, rating, session)
     }
 
     suspend fun getFavoritesMovies() : List<FavoriteMovie> {

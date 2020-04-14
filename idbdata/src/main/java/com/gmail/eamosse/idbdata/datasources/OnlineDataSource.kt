@@ -1,5 +1,6 @@
 package com.gmail.eamosse.idbdata.datasources
 
+import android.util.Log
 import com.gmail.eamosse.idbdata.api.body.RateBody
 import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.CategoryResponse
@@ -106,7 +107,39 @@ internal class OnlineDataSource(private val service: MovieService) {
         return safeCall {
             val response = service.getSearch(query)
             when (val result = response.parse()) {
+                is Result.Succes -> {
+                    Result.Succes(result.data.results)
+                }
+                is Result.Error -> result
+            }
+        }
+    }
+
+    suspend fun getMovieActor(movie:Int): Result<List<ActorResponse.ActorItem>> {
+        return safeCall {
+            val response = service.getMovieActors(movie)
+            when (val result = response.parse()) {
                 is Result.Succes -> Result.Succes(result.data.results)
+                is Result.Error -> result
+            }
+        }
+    }
+
+    suspend fun getActor(id:Int): Result<ActorResponse.ActorItem> {
+        return safeCall {
+            val response = service.getActor(id)
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data)
+                is Result.Error -> result
+            }
+        }
+    }
+
+    suspend fun getActorMovies(id:Int): Result<List<ActorMoviesResponse.ActorMovieItem>> {
+        return safeCall {
+            val response = service.getActorMovies(id)
+            when (val result = response.parse()) {
+                is Result.Succes -> Result.Succes(result.data.cast)
                 is Result.Error -> result
             }
         }
