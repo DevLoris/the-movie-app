@@ -1,5 +1,5 @@
 package com.gmail.eamosse.idbdata.api.response
-
+ 
 import com.gmail.eamosse.idbdata.data.Actor
 import com.google.gson.annotations.SerializedName
 
@@ -33,5 +33,5 @@ internal fun ActorResponse.ActorItem.toActor() = Actor(
     place_of_birth = place_of_birth ?: "Unknown",
     popularity = (popularity * 100 / 20).toInt(),
     biography = biography ?: "Nothing to say"
-
+ 
 )

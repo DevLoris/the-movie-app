@@ -1,5 +1,6 @@
 package com.gmail.eamosse.idbdata.api.service
 
+import android.app.Person
 import com.gmail.eamosse.idbdata.api.body.RateBody
 import com.gmail.eamosse.idbdata.api.response.*
 import com.gmail.eamosse.idbdata.api.response.CategoryResponse
@@ -28,8 +29,12 @@ internal interface MovieService {
     @GET("genre/movie/list")
     suspend fun getCategories(): Response<CategoryResponse>
 
+    /**
+     * @param withGenres ID de la catégorie
+     * @param page Page
+     */
     @GET("discover/movie")
-    suspend fun getDiscover(@Query("with_genres") withGenres:Int): Response<DiscoverResponse>
+    suspend fun getDiscover(@Query("with_genres") withGenres:Int, @Query("page") page:Int = 1): Response<DiscoverResponse>
 
     /*
         MOVIES
@@ -43,6 +48,18 @@ internal interface MovieService {
 
     @GET("movie/{movie}/similar")
     suspend fun getSimilarMovies(@Path("movie") movie:Int): Response<SimilarMoviesResponse>
+
+    @GET("movie/{movie}/videos")
+    suspend fun getVideosOfMovie(@Path("movie") movie:Int): Response<VideoMovieResponse>
+
+    /*
+        ACTOR
+     */
+    @GET("person/{person_id}")
+    suspend fun getPerson(@Path("person_id") person_id:Int) : Response<ActorResponse>;
+
+    @GET("person/{person_id}/movie_credits")
+    suspend fun getPersonCredits(@Path("person_id") person_id:Int) : Response<ActorCreditsResponse>;
 
     /*
         TRENDING

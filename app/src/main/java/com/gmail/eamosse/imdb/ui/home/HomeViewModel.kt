@@ -37,6 +37,10 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
     val similarMovie: LiveData<List<SimilarMovie>>
         get() = _similarMovie
 
+    private val _video: MutableLiveData<VideoMovie> = MutableLiveData()
+    val video: LiveData<VideoMovie>
+        get() = _video
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             when (val result = repository.getToken()) {
@@ -63,11 +67,31 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    fun getDiscover(genreId: Int) {
+    fun getDiscover(genreId: Int, page:Int = 1)  {
         viewModelScope.launch(Dispatchers.IO) {
-            when (val result = repository.getDiscover(genreId)) {
+            when (val result = repository.getDiscover(genreId, page)) {
                 is Result.Succes -> {
                     _discoveries.postValue(result.data)
+                }
+                is Result.Error -> {
+                    _error.postValue(result.message)
+                }
+            }
+        }
+    }
+
+    /**
+     * Lazyload discover with page
+     */
+    fun loadMoreDiscover(genreId: Int, page:Int = 1)  {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = repository.getDiscover(genreId, page)) {
+                is Result.Succes -> {
+                    val dis = _discoveries.value;
+                    dis.let {
+                        val movies = listOf<Discover>(*it!!.toTypedArray(), *result.data.toTypedArray());
+                        _discoveries.postValue(movies)
+                    }
                 }
                 is Result.Error -> {
                     _error.postValue(result.message)
@@ -102,6 +126,27 @@ class HomeViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
+    fun getTrailer(movieId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            when (val result = repository.getVideosOfMovie(movieId)) {
+                is Result.Succes -> {
+                    var filtered = result.data.find { it.type == ("Trailer");  }
+                    _video.postValue(filtered);
+                }
+                is Result.Error -> {
+                    _error.postValue(result.message)
+                }
+            }
+        }
+    }
+
+    fun favorite() {
+        if (movie.value is Movie) {
+            viewModelScope.launch(Dispatchers.IO) {
+                //repository.postRating(movie.value!!.id, rate, token.value!!.requestToken);
+            }
+        }
+    }
     fun rateCurrentMovie(rate:Float = 10f) {
         if (movie.value is Movie) {
             viewModelScope.launch(Dispatchers.IO) {

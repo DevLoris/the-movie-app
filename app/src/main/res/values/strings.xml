@@ -16,7 +16,9 @@
     <string name="best_movies">Films en tendance</string>
     <string name="best_peoples">Personnalités en tendance</string>
     <string name="categories">Catégories</string>
-    <string name="navigation_search">Recherche</string>
+    <string name="navigation_search">Recherche</string> 
+    <string name="favoris">Favoris</string>
+    <string name="_5_toiles">5 étoiles</string> 
     <string name="title_actors">Actors</string>
 
     <string-array name="actors_search">
@@ -32,5 +34,5 @@
     <string name="actor_search_step_1_title">STEP 1 : Find a movie or TV</string>
     <string name="actor_search_step_2_title">Select the movie or TV to discover actors</string>
     <string name="popularity">Popularity</string>
-    <string name="biography">Biography</string>
+    <string name="biography">Biography</string> 
 </resources>

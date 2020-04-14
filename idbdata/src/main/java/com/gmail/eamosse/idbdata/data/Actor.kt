@@ -1,5 +1,5 @@
 package com.gmail.eamosse.idbdata.data
-
+ 
 data class Actor(
     val id:Int,
     val name:String,
@@ -7,5 +7,5 @@ data class Actor(
     val popularity: Int,
     val birthday: String,
     val place_of_birth: String,
-    val biography: String
+    val biography: String 
 )
