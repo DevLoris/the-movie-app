@@ -22,7 +22,11 @@ internal data class MovieResponse(
         @SerializedName("vote_average")
         val vote_average: Double,
         @SerializedName("vote_count")
-        val vote_count: Int
+        val vote_count: Int,
+        @SerializedName("release_date")
+        val release_date: String,
+        @SerializedName("revenue")
+        val revenue: Int
     )
 
 
@@ -33,6 +37,8 @@ internal fun MovieResponse.toMovie() = Movie(
     overview = overview,
     tagline = tagline,
     poster_path = poster_path,
-    vote_average = vote_average,
-    vote_count = vote_count
+    vote_average = (vote_average * 10).toInt(),
+    vote_count = vote_count,
+    release_date = release_date,
+    revenue = revenue
 )
