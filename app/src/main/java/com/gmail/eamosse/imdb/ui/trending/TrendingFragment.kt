@@ -69,11 +69,11 @@ class TrendingFragment : Fragment() {
             })
 
             trendingPeoples.observe(viewLifecycleOwner, Observer {
-                binding.trendingActors.shimmerViewContainer.stopShimmerAnimation()
-                binding.trendingActors.shimmerViewContainer.visibility =  View.GONE
-                binding.trendingActors.categoryList.adapter = TrendingPeopleAdapter(it) {
-                }
-            })
+            binding.trendingActors.shimmerViewContainer.stopShimmerAnimation()
+            binding.trendingActors.shimmerViewContainer.visibility =  View.GONE
+            binding.trendingActors.categoryList.adapter = TrendingPeopleAdapter(it) {
+            }
+        })
         }
         return binding.root
     }

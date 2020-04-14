@@ -17,4 +17,20 @@
     <string name="best_peoples">Personnalités en tendance</string>
     <string name="categories">Catégories</string>
     <string name="navigation_search">Recherche</string>
+    <string name="title_actors">Actors</string>
+
+    <string-array name="actors_search">
+        <item>Series</item>
+        <item>Movies</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_actor">Actors</string>
+    <string name="search">Search</string>
+    <string name="actor_search_hint">Search with serie, movie...</string>
+    <string name="actor_search_step_1_title">STEP 1 : Find a movie or TV</string>
+    <string name="actor_search_step_2_title">Select the movie or TV to discover actors</string>
+    <string name="popularity">Popularity</string>
+    <string name="biography">Biography</string>
 </resources>

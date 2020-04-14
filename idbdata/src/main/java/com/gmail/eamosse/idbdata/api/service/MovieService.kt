@@ -7,6 +7,7 @@ import com.gmail.eamosse.idbdata.api.response.DiscoverResponse
 import com.gmail.eamosse.idbdata.api.response.MovieResponse
 import com.gmail.eamosse.idbdata.api.response.SimilarMoviesResponse
 import com.gmail.eamosse.idbdata.api.response.TokenResponse
+import com.gmail.eamosse.idbdata.data.ActorMovies
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -57,4 +58,20 @@ internal interface MovieService {
      */
     @GET("search/movie")
     suspend fun getSearch(@Query("query") query:String): Response<SearchResponse>
+
+    /*
+        ACTORS
+    */
+    //actors of a movie
+    @GET("person/{person_id}")
+    suspend fun getActor(@Path("person_id") id:Int): Response<ActorResponse.ActorItem>
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun getMovieActors(@Path("movie_id") movie:Int): Response<ActorResponse>
+
+    //movies of an actor
+    @GET("person/{person_id}/movie_credits")
+    suspend fun getActorMovies(@Path("person_id") id:Int): Response<ActorMoviesResponse>
+
+
 }
