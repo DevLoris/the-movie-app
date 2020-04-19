@@ -34,5 +34,6 @@
     <string name="actor_search_step_1_title">STEP 1 : Find a movie or TV</string>
     <string name="actor_search_step_2_title">Select the movie or TV to discover actors</string>
     <string name="popularity">Popularity</string>
-    <string name="biography">Biography</string> 
+    <string name="biography">Biography</string>
+    <string name="similar_movies">Similar movies</string>
 </resources>
